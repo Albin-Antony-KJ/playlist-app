@@ -25,7 +25,7 @@ public class SongPlaylistApplication {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.systest.javadev.songplaylist"))
 				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(apiInfo());
@@ -37,8 +37,8 @@ public class SongPlaylistApplication {
 				"Song Playlist API",
 				"This API is used to handle a Song Playlist.",
 				"v1.0",
-				"Terms of service",
-				new Contact("Albin Antony K J", "www.example.com", "kjalbinantony@gmail.com"),
-				"License of API", "API license URL", Collections.emptyList());
+				null,
+				new Contact("Albin Antony K J", null, "kjalbinantony@gmail.com"),
+				null, null, Collections.emptyList());
 	}
 }

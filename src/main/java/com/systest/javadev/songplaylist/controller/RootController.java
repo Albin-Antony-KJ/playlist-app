@@ -2,6 +2,7 @@ package com.systest.javadev.songplaylist.controller;
 
 import com.systest.javadev.songplaylist.model.PlaylistSongs;
 import com.systest.javadev.songplaylist.service.PlaylistService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;

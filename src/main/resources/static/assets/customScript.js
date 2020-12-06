@@ -53,6 +53,10 @@ function newSong(playlistId){
 function savePlaylist(){
     var playlist    = {};
     playlist["playlistName"]    = $("#playlistName").val();
+    if(playlist["playlistName"].trim() == ""){
+        alert("Enter a name for playlist");
+        return false;
+    }
     $.ajax({
         url         : "/Playlist/addPlaylist",
         method      : "post",
@@ -82,6 +86,10 @@ function saveSong(){
     song["name"]   = $("#songName").val();
     song["singer"] = $("#singer").val();
     song["playlist"] = {"playlistId": $("#playlistId").val()};
+    if(song["name"].trim() == "" || song["singer"].trim() == ""){
+        alert("Enter song details");
+        return false;
+    }
     $.ajax({
         url         : "/Playlist/addPlaylistSong",
         method      : "post",

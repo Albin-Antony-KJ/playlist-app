@@ -4,6 +4,8 @@ import com.systest.javadev.songplaylist.model.Playlist;
 import com.systest.javadev.songplaylist.model.Songs;
 import com.systest.javadev.songplaylist.service.PlaylistService;
 import com.systest.javadev.songplaylist.service.SongService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,7 @@ public class PlaylistController {
     }
 
     @PostMapping("/addPlaylist")
+    @ApiOperation(value="Add New Playlist", notes = "Method to create new playlist")
     public List<Playlist> addPlaylist(@RequestBody Playlist playlist){
         playlistService.addPlaylist(playlist);
         return playlistService.getAllPlaylist();
@@ -35,6 +38,7 @@ public class PlaylistController {
     }
 
     @PostMapping("/addPlaylistSong")
+    @ApiOperation(value="Add Songs to Playlist", notes = "Method to add new songs to a playlist")
     public List<Playlist> addPlaylistSong(@RequestBody Songs songs){
         songService.addSong(songs);
         return playlistService.getAllPlaylist();
