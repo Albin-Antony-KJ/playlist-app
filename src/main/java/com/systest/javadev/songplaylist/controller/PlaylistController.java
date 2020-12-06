@@ -7,8 +7,13 @@ import com.systest.javadev.songplaylist.service.SongService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +35,13 @@ public class PlaylistController {
     public List<Playlist> addPlaylist(@RequestBody Playlist playlist){
         playlistService.addPlaylist(playlist);
         return playlistService.getAllPlaylist();
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public List<String> duplicateEntryException(HttpServletRequest req, DataIntegrityViolationException e) {
+        List<String>    errorMsg    = new ArrayList<>();
+        errorMsg.add("Duplicate Entry");
+        return errorMsg;
     }
 
     @PostMapping("/getPlaylistSong")

@@ -57,3 +57,7 @@ body{
 .save {
     color: #4caf50;
 }
+
+.wordWrap {
+    overflow-wrap: break-word;
+}

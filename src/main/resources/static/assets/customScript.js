@@ -23,13 +23,13 @@ $(document).ready(function(){
             loadData(data);
         }
     });
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 function connect() {
     var socket = new SockJS('/playlist-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
         stompClient.subscribe('/getAllPlaylist', function (greeting) {
             loadData(JSON.parse(greeting.body));
         });
@@ -64,8 +64,19 @@ function savePlaylist(){
         dataType    : 'json',
         data        : JSON.stringify(playlist),
         success     : function(data){
-            $("#playlistModal").css("display", "none");
-            stompClient.send("/allPlaylist");
+            if(data=="Duplicate Entry"){
+                alert("Playlist name already used");
+                $("#playlistName").val("");
+            }else{
+                $("#playlistModal").css("display", "none");
+                stompClient.send("/allPlaylist");
+                new PNotify({
+                    title: 'SUCCESS',
+                    text: 'Saved Playlist Successfully',
+                    type: 'success',
+                    styling: 'brighttheme'
+                });
+            }
         }
     });
 }
@@ -77,6 +88,12 @@ function deletePlaylist(playlistId){
         contentType : "application/json; charset=utf-8",
         success     : function(data){
             stompClient.send("/allPlaylist");
+            new PNotify({
+                title: 'SUCCESS',
+                text: 'Deleted Playlist Successfully',
+                type: 'success',
+                styling: 'brighttheme'
+            });
         }
     });
 }
@@ -99,6 +116,12 @@ function saveSong(){
         success     : function(data){
             $("#songModal").css("display", "none");
             stompClient.send("/allPlaylist");
+            new PNotify({
+                title: 'SUCCESS',
+                text: 'Saved Song Successfully',
+                type: 'success',
+                styling: 'brighttheme'
+            });
         }
     });
 }
@@ -111,6 +134,12 @@ function deleteSong(songId){
         data        : "songId="+songId,
         success     : function(data){
             stompClient.send("/allPlaylist");
+            new PNotify({
+                title: 'SUCCESS',
+                text: 'Deleted Playlist Successfully',
+                type: 'success',
+                styling: 'brighttheme'
+            });
         }
     });
 }
@@ -119,20 +148,20 @@ function loadData(playlistJSON){
     var divContent  = "";
     $.each(playlistJSON, function(i, obj){
         divContent  += '<div class="row" style="min-height: 50px;">'+
-                            '<div class="col-md-2 col-md-offset-2 cellBorder" >'+obj.playlistName+'</div>'+
+                            '<div class="col-md-2 col-md-offset-2 cellBorder wordWrap" >'+obj.playlistName+'</div>'+
                             '<div class="col-md-8 col-md-offset-8 centerCellBorder">';
         $.each(obj.songsList, function(index, songObj){
             divContent +=       '<div class="row">'+
-                                    '<div class="col-md-5">'+songObj.name+'</div>'+
-                                    '<div class="col-md-5">'+songObj.singer+'</div>'+
-                                    '<div class="col-md-2"><a href="javascript:void(0);" onclick="deleteSong('+songObj.songId+');" class="delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>'+
+                                    '<div class="col-md-5 wordWrap">'+songObj.name+'</div>'+
+                                    '<div class="col-md-5 wordWrap">'+songObj.singer+'</div>'+
+                                    '<div class="col-md-2"><a href="javascript:void(0);" onclick="deleteSong('+songObj.songId+');" class="delete" data-toggle="tooltip" data-placement="top" title="Delete Song"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>'+
                                 '</div>';
         });
         divContent +=       '</div>'+
                             '<div class="col-md-2 col-md-offset-2 cellBorder">'+
                                 '<div class="row">'+
-                                    '<div class="col-md-6"><a href="javascript:void(0);" onclick="newSong('+obj.playlistId+');"><i class="fa fa-plus" aria-hidden="true"></i></a></div>'+
-                                    '<div class="col-md-6"><a href="javascript:void(0);" onclick="deletePlaylist('+obj.playlistId+');" class="delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>'+
+                                    '<div class="col-md-6"><a href="javascript:void(0);" onclick="newSong('+obj.playlistId+');" data-toggle="tooltip" data-placement="top" title="Add Song to Playlist"><i class="fa fa-plus" aria-hidden="true"></i></a></div>'+
+                                    '<div class="col-md-6"><a href="javascript:void(0);" onclick="deletePlaylist('+obj.playlistId+');" class="delete" data-toggle="tooltip" data-placement="top" title="Delete Playlist"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>'+
                                 '</div>'+
                             '</div>'+
                         '</div>';

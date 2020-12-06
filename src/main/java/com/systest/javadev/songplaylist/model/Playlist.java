@@ -14,7 +14,7 @@ public class Playlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "playlist_id")
     private int playlistId;
-    @Column(name = "playlist_name")
+    @Column(name = "playlist_name", unique = true)
     private String playlistName;
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.REMOVE)
     @JsonManagedReference
