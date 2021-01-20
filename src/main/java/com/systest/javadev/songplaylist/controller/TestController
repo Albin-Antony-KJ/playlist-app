@@ -12,12 +12,12 @@ import java.util.List;
 public class TestController {
 
     @GetMapping("/whatsapp")
-    public String getAllPlaylist(){
+    public String testWhatsapp(){
         return "Hello Whatsapp";
     }
 
     @PostMapping("/whatsappMsg")
-    public List<Songs> getPlaylistSong(@RequestParam String Body, @RequestParam String From){
+    public String getWhatsappMsg(@RequestParam String Body, @RequestParam String From){
         return Body+"====="+From;
     }
 }
