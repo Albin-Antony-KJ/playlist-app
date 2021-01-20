@@ -1,0 +1,23 @@
+package com.systest.javadev.songplaylist.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+public class TestController {
+
+    @GetMapping("/whatsapp")
+    public String getAllPlaylist(){
+        return "Hello Whatsapp";
+    }
+
+    @PostMapping("/whatsappMsg")
+    public List<Songs> getPlaylistSong(@RequestParam String Body, @RequestParam String From){
+        return Body+"====="+From;
+    }
+}
