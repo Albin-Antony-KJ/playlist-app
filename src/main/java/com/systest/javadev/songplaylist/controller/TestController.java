@@ -20,6 +20,17 @@ public class TestController {
     public String getWhatsappMsg(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
 
         //System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
-        return Body+"==\n=="+From+"==\n=="+To;
+        String mainMenu = "";
+        mainMenu    = "1: Appointment\n" +
+                "2: Prescription\n" +
+                "3: Reports\n" +
+                "4: Review\n" +
+                "5: Exit";
+        if(Body.equals("Hi")) {
+            return mainMenu;
+        } else{
+            return "Send a 'Hi' message to get customer service menu";
+            //return Body + "==\n==" + From + "==\n==" + To;
+        }
     }
 }
