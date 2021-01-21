@@ -17,7 +17,10 @@ public class TestController {
     }
 
     @PostMapping("/whatsappMsg")
-    public String getWhatsappMsg(@RequestParam String Body, @RequestParam String From){
-        return Body+"====="+From;
+    public String getWhatsappMsg(@RequestParam String Body, @RequestParam String From,  @RequestParam String To,
+                                 @RequestParam String MessageSid, @RequestParam String AccountSid, @RequestParam String MessagingServiceSid){
+
+        System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
+        return Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid;
     }
 }
