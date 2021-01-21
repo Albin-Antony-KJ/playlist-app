@@ -21,11 +21,13 @@ public class TestController {
 
         //System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
         String mainMenu = "";
-        mainMenu    = "1: Appointment\n" +
+        mainMenu    = "What can we do for you?" +
+                "1: Appointment\n" +
                 "2: Prescription\n" +
                 "3: Reports\n" +
                 "4: Review\n" +
-                "5: Exit";
+                "5: Exit" +
+                "Reply with your option.";
         if(Body.equals("Hi")) {
             return mainMenu;
         } else{
