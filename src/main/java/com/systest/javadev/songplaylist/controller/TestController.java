@@ -21,6 +21,6 @@ public class TestController {
                                  @RequestParam String MessageSid, @RequestParam String AccountSid, @RequestParam String MessagingServiceSid){
 
         System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
-        return Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid;
+        return Body+"====="+From+"====="+To+"==="+MessageSid+"==="+AccountSid+"==="+MessagingServiceSid;
     }
 }
