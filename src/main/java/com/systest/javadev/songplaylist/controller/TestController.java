@@ -33,11 +33,11 @@ public class TestController {
         appintmentMenu  = "11: New Appoinment\n" +
                 "12: Cancel Appointment\n";
         reviewMenu  = "Please select your review option\n" +
-                "41: Very Good" +
-                "42: Good" +
-                "43: Normal" +
-                "44: Bad" +
-                "45: Very Bad";
+                "41: Very Good\n" +
+                "42: Good\n" +
+                "43: Normal\n" +
+                "44: Bad\n" +
+                "45: Very Bad\n";
         /*if(Body.equals("Hi")) {
             return mainMenu;
         } else{
