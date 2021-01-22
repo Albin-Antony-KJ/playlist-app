@@ -21,6 +21,8 @@ public class TestController {
 
         //System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
         String mainMenu = "";
+        String appintmentMenu   = "";
+        String reviewMenu   = "";
         mainMenu    = "What can we do for you?\n" +
                 "1: Appointment\n" +
                 "2: Prescription\n" +
@@ -28,11 +30,33 @@ public class TestController {
                 "4: Review\n" +
                 "5: Exit\n" +
                 "Reply with your option.";
-        if(Body.equals("Hi")) {
+        appintmentMenu  = "11: New Appoinment\n" +
+                "12: Cancel Appointment\n";
+        reviewMenu  = "Please select your review option\n" +
+                "41: Very Good" +
+                "42: Good" +
+                "43: Normal" +
+                "44: Bad" +
+                "45: Very Bad";
+        /*if(Body.equals("Hi")) {
             return mainMenu;
         } else{
             return "Send a 'Hi' message to get customer service menu";
             //return Body + "==\n==" + From + "==\n==" + To;
+        }*/
+        switch (Body){
+            case "Hi":
+                return mainMenu;
+            case "1":
+                return appintmentMenu;
+            case "2":
+                return "";
+            case "3":
+                return "";
+            case "4":
+                return reviewMenu;
+            default:
+                return "Send a 'Hi' message to get customer service menu";
         }
     }
 }
