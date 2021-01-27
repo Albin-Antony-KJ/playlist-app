@@ -6,10 +6,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TestController {
+
+    public static Map<String, String> msgTrackStack = new HashMap<>();
 
     @GetMapping("/whatsapp")
     public String testWhatsapp(){
@@ -18,7 +22,9 @@ public class TestController {
 
     @PostMapping("/whatsappMsg")
     public String getWhatsappMsg(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
-
+        String msgTrack = msgTrackStack.get(From);
+        msgTrack    = msgTrack != "" ? msgTrack+"~"+Body : Body;
+        msgTrackStack.put(From, Body);
         //System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
         String mainMenu = "";
         String appintmentMenu   = "";
@@ -44,6 +50,7 @@ public class TestController {
             return "Send a 'Hi' message to get customer service menu";
             //return Body + "==\n==" + From + "==\n==" + To;
         }*/
+        System.out.println(msgTrackStack.get(From));
         switch (Body){
             case "Hi":
                 return mainMenu;
