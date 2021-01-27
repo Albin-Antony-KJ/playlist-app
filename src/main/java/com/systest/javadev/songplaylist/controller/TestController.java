@@ -23,7 +23,7 @@ public class TestController {
     @PostMapping("/whatsappMsg")
     public String getWhatsappMsg(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
         String msgTrack = msgTrackStack.get(From);
-        msgTrack    = msgTrack != "" ? msgTrack+"~"+Body : Body;
+        msgTrack    = msgTrack != null ? msgTrack+"~"+Body : Body;
         msgTrackStack.put(From, Body);
         //System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
         String mainMenu = "";
@@ -50,7 +50,7 @@ public class TestController {
             return "Send a 'Hi' message to get customer service menu";
             //return Body + "==\n==" + From + "==\n==" + To;
         }*/
-        System.out.println(msgTrackStack.get("Stack : "+From));
+        System.out.println("Stack : "+msgTrackStack.get(From));
         switch (Body){
             case "Hi":
                 return mainMenu;
