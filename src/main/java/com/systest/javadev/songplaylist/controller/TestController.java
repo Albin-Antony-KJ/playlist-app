@@ -13,7 +13,7 @@ import java.util.Map;
 @RestController
 public class TestController {
 
-    public static Map<String, String> msgTrackStack = new HashMap<>();
+    private static Map<String, String> msgTrackStack = new HashMap<>();
 
     @GetMapping("/whatsapp")
     public String testWhatsapp(){
@@ -50,7 +50,7 @@ public class TestController {
             return "Send a 'Hi' message to get customer service menu";
             //return Body + "==\n==" + From + "==\n==" + To;
         }*/
-        System.out.println(msgTrackStack.get(From));
+        System.out.println(msgTrackStack.get("Stack : "+From));
         switch (Body){
             case "Hi":
                 return mainMenu;
