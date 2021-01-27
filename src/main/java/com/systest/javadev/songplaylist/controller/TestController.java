@@ -22,11 +22,11 @@ public class TestController {
 
     @PostMapping("/whatsappMsg")
     public String getWhatsappMsg(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
-        
+
         System.out.println("Map : "+msgTrackStack);
         String msgTrack = msgTrackStack.get(From);
         msgTrack    = msgTrack != null ? msgTrack+"~"+Body : Body;
-        msgTrackStack.put(From, Body);
+        msgTrackStack.put(From, msgTrack);
         //System.out.println(Body+"====="+From+"====="+To+"\n\n"+MessageSid+"\n\n"+AccountSid+"\n\n"+MessagingServiceSid);
         String mainMenu = "";
         String appintmentMenu   = "";
