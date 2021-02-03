@@ -26,7 +26,8 @@ public class TestController {
 
     @PostMapping("/feedback_response")
     public String feedbackResponse(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
-        return "You have opted "+Body+" feedback for the booking "+feedbackBookingId.get(From);
+        //return "You have opted "+Body+" feedback for the booking "+feedbackBookingId.get(From);
+        return Body+"====="+From+"======"+To;
     }
 
     @PostMapping("/whatsappMsg")
