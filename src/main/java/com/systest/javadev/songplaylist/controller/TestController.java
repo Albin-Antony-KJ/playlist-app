@@ -24,7 +24,7 @@ public class TestController {
         return "Hello Whatsapp";
     }
 
-    @GetMapping("/feedback_resopnse")
+    @PostMapping("/feedback_resopnse")
     public String feedbackResponse(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
         return "You have opted "+Body+" feedback for the booking "+feedbackBookingId.get(From);
     }
