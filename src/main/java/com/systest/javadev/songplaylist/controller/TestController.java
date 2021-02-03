@@ -14,10 +14,19 @@ import java.util.Map;
 public class TestController {
 
     private static Map<String, String> msgTrackStack = new HashMap<>();
+    private static Map<String, String> feedbackBookingId = new HashMap<String, String>(){{
+        put("+918089733774","BKNO7894532");
+        put("+919633118773","BKNO7889455");
+    }};
 
     @GetMapping("/whatsapp")
     public String testWhatsapp(){
         return "Hello Whatsapp";
+    }
+
+    @GetMapping("/")
+    public String feedbackResponse(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
+        return "You have opted "+Body+" feedback for the booking "+feedbackBookingId.get(From);
     }
 
     @PostMapping("/whatsappMsg")
