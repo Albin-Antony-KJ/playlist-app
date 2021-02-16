@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +15,9 @@ import java.util.Map;
 public class TestController {
 
     private static Map<String, String> msgTrackStack = new HashMap<>();
-    private static Map<String, String> feedbackBookingId = new HashMap<String, String>(){{
-        put("+918089733774","BKNO7894532");
-        put("+919633118773","BKNO7889455");
+    private static Map<String, HashMap<String, String>> feedbackBookingId = new HashMap<String, HashMap<String, String>>(){{
+        put("+918089733774",new HashMap(){{put("BookingId","BKNO7894532");put("source","BIS");}});
+        put("+919633118773",new HashMap(){{put("BookingId","BKNO7889455");put("source","BIS");}});
     }};
 
     @GetMapping("/whatsapp")
@@ -26,8 +27,16 @@ public class TestController {
 
     @PostMapping("/feedback_response")
     public String feedbackResponse(@RequestParam String Body, @RequestParam String From,  @RequestParam String To){
-        //return "You have opted "+Body+" feedback for the booking "+feedbackBookingId.get(From);
-        return Body+"====="+From+"======"+To;
+        String response = "You have opted "+Body+" feedback for the booking "+feedbackBookingId.get(From.replace("whatsapp:",""));
+        feedbackBookingId.remove(From.replace("whatsapp:",""));
+        return response;
+        //return Body+"====="+From+"======"+To;
+    }
+
+    @PostMapping("/statusCallBack")
+    public void statusCallBack(HttpServletRequest request, HttpServletResponse httpServletResponse){
+        System.out.println(request.getParameter("MessageSid"));
+        System.out.println(request.getParameter("MessageStatus"));
     }
 
     @PostMapping("/whatsappMsg")
