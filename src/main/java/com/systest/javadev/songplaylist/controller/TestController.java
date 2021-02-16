@@ -35,6 +35,7 @@ public class TestController {
 
     @PostMapping("/statusCallBack")
     public void statusCallBack(HttpServletRequest request, HttpServletResponse httpServletResponse){
+        System.out.println("Whatsapp Status Callback");
         System.out.println(request.getParameter("MessageSid"));
         System.out.println(request.getParameter("MessageStatus"));
     }
